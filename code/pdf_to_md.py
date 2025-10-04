@@ -2,7 +2,7 @@ import os
 import fitz  # PyMuPDF
 
 # Directorios
-DATA_DIR = "./data"
+DATA_DIR = "./downloads"
 OUTPUT_DIR = "./extracted_md"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 

@@ -17,7 +17,7 @@ logger = logging.getLogger(__name__)
 # 🔧 CONFIGURA TU RANGO AQUÍ - CAMBIA ESTOS VALORES
 # ============================================================================
 START_INDEX = 1      # Número del artículo inicial (ej: 1 = primer artículo)
-END_INDEX = 10       # Número del artículo final (ej: 10 = décimo artículo)
+END_INDEX = 608       # Número del artículo final (ej: 10 = décimo artículo)
 # ============================================================================
 
 def validar_configuracion():
