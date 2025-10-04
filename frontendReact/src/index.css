@@ -1,0 +1,115 @@
+body {
+  background-color: #f8f9fa;
+  color: #212529;
+}
+
+.navbar {
+  background-color: #f8f9fa !important;
+  color: #212529 !important;
+  margin-top: 1vh;
+}
+
+.navbar-brand {
+  color: #212529 !important;
+}
+
+.card {
+  background-color: #ffffff;
+  color: #212529;
+  border-color: #dee2e6;
+}
+
+/* Dark theme */
+body.dark-theme {
+  background-color: #121212;
+  color: #f8f9fa;
+}
+
+body.dark-theme .navbar {
+  background-color: #222222 !important;
+  color: #f8f9fa !important;
+}
+
+body.dark-theme .navbar-brand {
+  color: #f8f9fa !important;
+}
+
+body.dark-theme .card {
+  background-color: #383838;
+  color: #f8f9fa;
+  border-color: #333333;
+}
+
+body.dark-theme .alert-success {
+  color: #f8f9fa;
+  background-color: #383838;
+  border-color: #333333;
+}
+
+.translate-transition {
+  transition: transform 0.3s ease-in-out;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+.toggle-btn {
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: center;
+  color: #0d6efd;
+  font-weight: 500;
+  margin-top: 10px;
+  border: none;
+  background: transparent;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.toggle-btn:hover {
+  color: #0a58ca;
+  transform: translateY(-2px);
+}
+
+.collapse-card {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  padding: 0 0;
+  transition: max-height 0.4s ease, opacity 0.4s ease, padding 0.3s ease;
+}
+
+.collapse-card.show {
+  max-height: 600px; /* suficientemente grande para cualquier contenido */
+  opacity: 1;
+  padding: 10px 0;
+  margin-bottom: 15px;
+}
+
+.collapse-card.show > .card {
+  animation: slideFadeIn 0.4s ease forwards;
+}
+
+/* Animación de entrada del contenido */
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .col-12 {
+    margin-bottom: 20px;
+  }
+
+  .collapse-card.show {
+    max-height: 800px;
+  }
+}
