@@ -1,0 +1,191 @@
+# 🚫 GITIGNORE - Space App Hesoyam Scientific Scraper
+# ============================================================================
+
+# 📄 PDFs y Documentos Generados
+# ============================================================================
+*.pdf
+*.PDF
+Pdf/
+PDF/
+*.pdfs
+downloads/
+downloads_*/
+downloads_plos/
+downloads_range/
+downloads_functional/
+downloads_test/
+downloads_advanced/
+
+# 📁 Directorios de Archivos Descargados
+# ============================================================================
+PDFs/
+articles/
+papers/
+scientific_papers/
+pubmed_papers/
+
+# 📊 Archivos de Datos Temporales
+# ============================================================================
+*.tmp
+*.temp
+*.log
+*.cache
+*.pickle
+*.pkl
+*.csv.bak
+*.csv.backup
+
+# 🧪 Archivos de Testing y Experimentación
+# ============================================================================
+test_files/
+experimental/
+debug_files/
+scratch/
+temp_pdfs/
+sample_downloads/
+
+# 🐍 Python General
+# ============================================================================
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# 🔧 Entornos Virtuales
+# ============================================================================
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+.conda/
+
+# 📝 Jupyter Notebooks
+# ============================================================================
+.ipynb_checkpoints
+*.ipynb
+
+# 🖥️ Sistema Operativo
+# ============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# 🔧 Editores y IDEs
+# ============================================================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# 📋 Logs y Archivos de Sistema
+# ============================================================================
+*.log
+logs/
+log/
+*.out
+*.err
+*.pid
+*.seed
+*.pid.lock
+
+# 💾 Archivos de Backup
+# ============================================================================
+*.bak
+*.backup
+*.old
+*.orig
+*.save
+*.swp
+*.tmp*
+
+# 🔄 Archivos de Sincronización
+# ============================================================================
+.sync/
+.synk/
+.git-sync/
+
+# 🎯 Archivos Específicos del Proyecto Científico
+# ============================================================================
+# Mantener estructura pero excluir contenido binario
+article_files/
+research_data/
+crawled_content/
+analyzed_results.json
+conversion_results/
+markdown_output/
+
+# 📊 Archivos de Análisis Pesados
+# ============================================================================
+*.json.bak
+analysis_cache/
+processed_data/
+extracted_text/
+parsed_content/
+
+# 🌐 Archivos de Navegación Web
+# ============================================================================
+selenium_debug/
+browser_profiles/
+webdriver_logs/
+chrome_debug/
+
+# 🔐 Archivos Sensibles
+# ============================================================================
+config_local.py
+secrets.py
+personal_settings.py
+api_keys.txt
+credentials.json
+
+# ✅ ARCHIVOS QUE SÍ INCLUIR (Si existe alguno problemático)
+# ============================================================================
+!README.md
+!CONFIGURACION_RANGO.md
+!RESUMEN_FINAL.md
+!requirements.txt
+!install.sh
+!*.py
+!*_config.py
+!config/*.py
+
+# 📝 NOTAS PARA EL DESARROLLADOR
+# ============================================================================
+# Este gitignore está diseñado para:
+# 1. Excluir todos los PDFs descargados automáticamente
+# 2. Mantener la estructura del código y documentación
+# 3. No incluir archivos temporales ni de cache
+# 4. Preservar archivos de configuración de ejemplo
+# 5. Mantener limpio el repositorio principal
+#
+# Para subir PDFs manualmente, usar otro repositorio o almacenamiento externo

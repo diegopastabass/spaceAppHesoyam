@@ -1,0 +1,44 @@
+# 📋 EJEMPLO DE GITIGNORE - Space App Hesoyam
+# ============================================================================
+# 
+# Este archivo muestra qué tipos de archivos se excluyen del repositorio.
+# 
+# 🎯 PRINCIPAL OBJETIVO: No subir PDFs al repositorio Git
+# ============================================================================
+
+# ❌ LO QUE SE EXCLUYE (NO subir):
+# ============================================================================
+
+# 📄 PDFs y documentos descargados
+*.pdf                          # Todos los archivos PDF
+downloads/                     # Carpeta de descargas automáticas
+downloads_plos/                # PDFs específicos PLoS ONE
+*.PDF                          # También PDFs en mayúscula
+
+# 🐍 Archivos temporales de Python
+__pycache__/                   # Cache de Python
+*.pyc                          # Bytecode compilado
+*.log                          # Archivos de log
+
+# 🖥️ Archivos del sistema
+.DS_Store                      # macOS
+Thumbs.db                      # Windows
+*.tmp                          # Archivos temporales
+
+# ✅ LO QUE SÍ SE INCLUYE (SÍ subir):
+# ============================================================================
+
+# 📚 Documentación y código
+README.md                      # Documentación principal
+CONFIGURACION_RANGO.md         # Guía de configuración
+RESUMEN_FINAL.md              # Resumen del proyecto
+*.py                           # Todos los scripts Python
+requirements.txt               # Dependencias
+config_range.py               # Archivos de configuración
+install.sh                    # Scripts de instalación
+
+# 📁 Estructura del proyecto
+scrapers/                     # Código fuente
+scrapers/*.py                 # Scripts de scraping
+config/                       # Configuración
+logs/                        # Solo estructura, no contenido
