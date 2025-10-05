@@ -1,0 +1,7 @@
+{
+  "graphs": {
+    "main": {
+      "entry": "graph.py:graph"
+    }
+  }
+}
