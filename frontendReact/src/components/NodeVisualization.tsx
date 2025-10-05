@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Modal, Button } from 'react-bootstrap';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import './NodeVisualization.css';
+import React, { useEffect, useRef, useState } from "react";
+import { Modal, Button } from "react-bootstrap";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+import "./NodeVisualization.css";
 
 interface NodeData {
   id: string;
-  type: 'question' | 'pdf';
+  type: "question" | "pdf";
   label: string;
   question?: string;
   pdfs?: string[];
@@ -19,51 +19,58 @@ interface NodeVisualizationProps {
   onGoToChat?: () => void;
 }
 
-const NodeVisualization: React.FC<NodeVisualizationProps> = ({ 
-  data, 
-  onNodeClick, 
-  onGoToChat 
+const NodeVisualization: React.FC<NodeVisualizationProps> = ({
+  data,
+  onNodeClick,
+  onGoToChat,
 }) => {
   const svgRef = useRef<SVGSVGElement>(null);
   const [selectedNode, setSelectedNode] = useState<NodeData | null>(null);
   const [showModal, setShowModal] = useState(false);
 
-  // Usar data si está disponible, sino usar datos de ejemplo
-  const nodeData: NodeData[] = data.length > 0 ? data : [
-    {
-      id: 'p1',
-      type: 'question' as const,
-      label: 'P1',
-      question: '¿Cuáles son las principales misiones biológicas de la NASA y qué objetivos tienen?',
-      pdfs: ['mission_bio_2023.pdf', 'nasa_biological_research.pdf', 'space_biology_overview.pdf'],
-      x: 400,
-      y: 300
-    },
-    {
-      id: 'bpe',
-      type: 'pdf' as const,
-      label: 'BPE',
-      x: 200,
-      y: 200
-    },
-    {
-      id: 'pdf1',
-      type: 'pdf' as const,
-      label: 'PDF1',
-      x: 200,
-      y: 400
-    },
-    {
-      id: 'rag',
-      type: 'pdf' as const,
-      label: 'RAG',
-      x: 600,
-      y: 300
-    }
-  ];
+  const nodeData: NodeData[] =
+    data.length > 0
+      ? data
+      : [
+          {
+            id: "p1",
+            type: "question" as const,
+            label: "P1",
+            question:
+              "¿Cuáles son las principales misiones biológicas de la NASA y qué objetivos tienen?",
+            pdfs: [
+              "mission_bio_2023.pdf",
+              "nasa_biological_research.pdf",
+              "space_biology_overview.pdf",
+            ],
+            x: 400,
+            y: 300,
+          },
+          {
+            id: "bpe",
+            type: "pdf" as const,
+            label: "BPE",
+            x: 200,
+            y: 200,
+          },
+          {
+            id: "pdf1",
+            type: "pdf" as const,
+            label: "PDF1",
+            x: 200,
+            y: 400,
+          },
+          {
+            id: "rag",
+            type: "pdf" as const,
+            label: "RAG",
+            x: 600,
+            y: 300,
+          },
+        ];
 
   const handleNodeClick = (node: NodeData) => {
-    if (node.type === 'question') {
+    if (node.type === "question") {
       setSelectedNode(node);
       setShowModal(true);
     }
@@ -89,26 +96,29 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
     if (!svg) return;
 
     // Limpiar SVG
-    svg.innerHTML = '';
+    svg.innerHTML = "";
 
     // Crear grupo para los elementos
-    const g = document.createElementNS('http://www.w3.org/2000/svg', 'g');
+    const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
     svg.appendChild(g);
 
     // Dibujar conexiones primero (para que estén detrás de los nodos)
-    nodeData.forEach(node => {
-      if (node.type === 'question') {
+    nodeData.forEach((node) => {
+      if (node.type === "question") {
         // Conectar nodo principal con otros nodos
-        nodeData.forEach(otherNode => {
+        nodeData.forEach((otherNode) => {
           if (otherNode.id !== node.id) {
-            const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-            line.setAttribute('x1', node.x!.toString());
-            line.setAttribute('y1', node.y!.toString());
-            line.setAttribute('x2', otherNode.x!.toString());
-            line.setAttribute('y2', otherNode.y!.toString());
-            line.setAttribute('stroke', '#6c757d');
-            line.setAttribute('stroke-width', '2');
-            line.setAttribute('opacity', '0.6');
+            const line = document.createElementNS(
+              "http://www.w3.org/2000/svg",
+              "line"
+            );
+            line.setAttribute("x1", node.x!.toString());
+            line.setAttribute("y1", node.y!.toString());
+            line.setAttribute("x2", otherNode.x!.toString());
+            line.setAttribute("y2", otherNode.y!.toString());
+            line.setAttribute("stroke", "#6c757d");
+            line.setAttribute("stroke-width", "2");
+            line.setAttribute("opacity", "0.6");
             g.appendChild(line);
           }
         });
@@ -116,71 +126,84 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
     });
 
     // Dibujar nodos
-    nodeData.forEach(node => {
+    nodeData.forEach((node) => {
       // Crear grupo para el nodo
-      const nodeGroup = document.createElementNS('http://www.w3.org/2000/svg', 'g');
-      nodeGroup.setAttribute('transform', `translate(${node.x}, ${node.y})`);
-      nodeGroup.style.cursor = 'pointer';
+      const nodeGroup = document.createElementNS(
+        "http://www.w3.org/2000/svg",
+        "g"
+      );
+      nodeGroup.setAttribute("transform", `translate(${node.x}, ${node.y})`);
+      nodeGroup.style.cursor = "pointer";
 
-      if (node.type === 'question') {
+      if (node.type === "question") {
         // Nodo principal circular
-        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
-        circle.setAttribute('r', '40');
-        circle.setAttribute('fill', '#007bff');
-        circle.setAttribute('stroke', '#0056b3');
-        circle.setAttribute('stroke-width', '3');
+        const circle = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "circle"
+        );
+        circle.setAttribute("r", "40");
+        circle.setAttribute("fill", "#007bff");
+        circle.setAttribute("stroke", "#0056b3");
+        circle.setAttribute("stroke-width", "3");
         nodeGroup.appendChild(circle);
 
         // Texto del nodo
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('dy', '0.35em');
-        text.setAttribute('fill', 'white');
-        text.setAttribute('font-size', '16');
-        text.setAttribute('font-weight', 'bold');
+        const text = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text"
+        );
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dy", "0.35em");
+        text.setAttribute("fill", "white");
+        text.setAttribute("font-size", "16");
+        text.setAttribute("font-weight", "bold");
         text.textContent = node.label;
         nodeGroup.appendChild(text);
       } else {
         // Nodos PDF rectangulares
-        const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rect.setAttribute('width', '60');
-        rect.setAttribute('height', '40');
-        rect.setAttribute('x', '-30');
-        rect.setAttribute('y', '-20');
-        rect.setAttribute('fill', '#28a745');
-        rect.setAttribute('stroke', '#1e7e34');
-        rect.setAttribute('stroke-width', '2');
-        rect.setAttribute('rx', '5');
+        const rect = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "rect"
+        );
+        rect.setAttribute("width", "60");
+        rect.setAttribute("height", "40");
+        rect.setAttribute("x", "-30");
+        rect.setAttribute("y", "-20");
+        rect.setAttribute("fill", "#28a745");
+        rect.setAttribute("stroke", "#1e7e34");
+        rect.setAttribute("stroke-width", "2");
+        rect.setAttribute("rx", "5");
         nodeGroup.appendChild(rect);
 
         // Texto del nodo PDF
-        const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        text.setAttribute('text-anchor', 'middle');
-        text.setAttribute('dy', '0.35em');
-        text.setAttribute('fill', 'white');
-        text.setAttribute('font-size', '12');
-        text.setAttribute('font-weight', 'bold');
+        const text = document.createElementNS(
+          "http://www.w3.org/2000/svg",
+          "text"
+        );
+        text.setAttribute("text-anchor", "middle");
+        text.setAttribute("dy", "0.35em");
+        text.setAttribute("fill", "white");
+        text.setAttribute("font-size", "12");
+        text.setAttribute("font-weight", "bold");
         text.textContent = node.label;
         nodeGroup.appendChild(text);
       }
 
       // Agregar evento de click
-      nodeGroup.addEventListener('click', () => handleNodeClick(node));
+      nodeGroup.addEventListener("click", () => handleNodeClick(node));
 
       // Efecto hover
-      nodeGroup.addEventListener('mouseenter', () => {
+      nodeGroup.addEventListener("mouseenter", () => {
         nodeGroup.style.transform = `translate(${node.x}px, ${node.y}px) scale(1.1)`;
-        nodeGroup.style.transition = 'transform 0.2s ease';
+        nodeGroup.style.transition = "transform 0.2s ease";
       });
 
-      nodeGroup.addEventListener('mouseleave', () => {
+      nodeGroup.addEventListener("mouseleave", () => {
         nodeGroup.style.transform = `translate(${node.x}px, ${node.y}px) scale(1)`;
       });
 
       g.appendChild(nodeGroup);
     });
-
-
   }, [data]);
 
   return (
@@ -189,7 +212,7 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
         <h4>Visualización de Consultas RAG</h4>
         <small className="text-muted">Haz clic en P1 para ver detalles</small>
       </div>
-      
+
       <div className="border rounded p-3 bg-light">
         <svg
           ref={svgRef}
@@ -212,20 +235,24 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
               </div>
             </div>
             <div>
-              <Modal.Title className="mb-0">Detalles de la Consulta RAG</Modal.Title>
-              <small className="opacity-75">Análisis de fuentes y contexto</small>
+              <Modal.Title className="mb-0">
+                Detalles de la Consulta RAG
+              </Modal.Title>
+              <small className="opacity-75">
+                Análisis de fuentes y contexto
+              </small>
             </div>
           </div>
-          <Button 
-            variant="link" 
+          <Button
+            variant="link"
             className="text-white p-0 ms-auto"
             onClick={handleCloseModal}
-            style={{ fontSize: '1.5rem' }}
+            style={{ fontSize: "1.5rem" }}
           >
             <i className="fas fa-times"></i>
           </Button>
         </Modal.Header>
-        
+
         <Modal.Body className="p-4">
           {selectedNode && (
             <div className="row">
@@ -239,7 +266,9 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
                     </h5>
                   </div>
                   <div className="card-body">
-                    <p className="mb-0 fs-6 text-muted">{selectedNode.question}</p>
+                    <p className="mb-0 fs-6 text-muted">
+                      {selectedNode.question}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -253,8 +282,12 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
                         <div className="text-primary mb-2">
                           <i className="fas fa-file-pdf fs-2"></i>
                         </div>
-                        <h4 className="text-primary mb-1">{selectedNode.pdfs?.length || 0}</h4>
-                        <small className="text-muted">Documentos analizados</small>
+                        <h4 className="text-primary mb-1">
+                          {selectedNode.pdfs?.length || 0}
+                        </h4>
+                        <small className="text-muted">
+                          Documentos analizados
+                        </small>
                       </div>
                     </div>
                   </div>
@@ -265,7 +298,9 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
                           <i className="fas fa-brain fs-2"></i>
                         </div>
                         <h4 className="text-success mb-1">RAG</h4>
-                        <small className="text-muted">Sistema de recuperación</small>
+                        <small className="text-muted">
+                          Sistema de recuperación
+                        </small>
                       </div>
                     </div>
                   </div>
@@ -301,11 +336,13 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
                           </div>
                           <div className="flex-grow-1">
                             <h6 className="mb-1 text-truncate">{pdf}</h6>
-                            <small className="text-muted">Documento científico</small>
+                            <small className="text-muted">
+                              Documento científico
+                            </small>
                           </div>
                           <div className="ms-2">
-                            <Button 
-                              variant="outline-primary" 
+                            <Button
+                              variant="outline-primary"
                               size="sm"
                               className="rounded-pill"
                             >
@@ -322,19 +359,19 @@ const NodeVisualization: React.FC<NodeVisualizationProps> = ({
             </div>
           )}
         </Modal.Body>
-        
+
         <Modal.Footer className="bg-light border-0 p-4">
           <div className="d-flex justify-content-between w-100">
-            <Button 
-              variant="outline-secondary" 
+            <Button
+              variant="outline-secondary"
               onClick={handleCloseModal}
               className="px-4"
             >
               <i className="fas fa-times me-2"></i>
               Cerrar
             </Button>
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               onClick={handleGoToChat}
               className="px-4 rounded-pill"
             >
