@@ -24,7 +24,7 @@ def load_stack():
         api_version=os.getenv("AZURE_OPENAI_API_VERSION", "2024-12-01-preview"),
         azure_endpoint=os.getenv("AZURE_OPENAI_ENDPOINT"),
         api_key=os.getenv("AZURE_OPENAI_API_KEY"),
-        temperature=0.2,
+        temperature=0.1,
         max_retries=2,
     )
     graph = build_agentic_graph(llm, db)
@@ -41,7 +41,7 @@ for m in st.session_state.messages:
         st.markdown(m["content"])
 
 # input del chat
-question = st.chat_input("Escribe tu pregunta (NASA biosciences / space life sciences)...")
+question = st.chat_input("Escribe tu pregunta contexto NASA Biosciences / Space Life Sciences")
 if question:
     st.session_state.messages.append({"role": "user", "content": question})
     with st.chat_message("user"):
@@ -49,7 +49,7 @@ if question:
 
     with st.spinner("Pensando..."):
         # defaults internos: k=3, umbral auto (0.70 si similitud, 0.35 si distancia)
-        state = {"question": question, "k_per_query": 3}
+        state = {"question": question, "k_per_query": 6}
         out = graph.invoke(state)
 
     answer = out.get("answer_md", "No response.")

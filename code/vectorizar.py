@@ -43,8 +43,8 @@ print(f"⏱️ Tiempo de carga: {time.time() - start:.2f} s\n")
 
 start = time.time()
 splitter = RecursiveCharacterTextSplitter(
-    chunk_size=1000,
-    chunk_overlap=150,
+    chunk_size=3000,
+    chunk_overlap=250,
     length_function=len
 )
 
